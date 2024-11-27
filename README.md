@@ -18,11 +18,15 @@ Referencing Pytorch implementation of BRECQ, ICLR 2021
 3. Weight for the mnist diffusion model (so don't need to train again)
 - https://drive.google.com/file/d/1uWbVDiU0Me2yZN9jvaT2d1Hivvm6Ud6I/view?usp=sharing
 
+# Progress
+1. Finish Implementing FID Score
+2. Finish implementing INT4, INT5, INT8
+
+# Problem Observed
+1. Not sure why but INT4 has lower FID than the FP32 model... probably MNIST is too easy?
 
 # Experiments TODO
 1. Try other more challenging dataset such as Cifar10
 2. The activation distribution change-over-time chart
-3. Check how to quantize to other degree such as INT4, INT5, INT8. Currently we have the code for INT8.
-4. The FID Score of different quantization method
 5. Qualitative Result comparison
 6. Split the diffusion process to N chunks, and quantize the model in different chunks separately.
