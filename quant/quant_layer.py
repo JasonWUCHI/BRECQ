@@ -129,7 +129,6 @@ class UniformAffineQuantizer(nn.Module):
                         best_score = score
                         delta = (new_max - new_min) / (2 ** self.n_bits - 1)
                         zero_point = (- new_min / delta).round()
-    
             else:
                 raise NotImplementedError
 
@@ -167,6 +166,10 @@ class QuantModule(nn.Module):
             self.fwd_kwargs = dict(stride=org_module.stride, padding=org_module.padding,
                                    dilation=org_module.dilation, groups=org_module.groups)
             self.fwd_func = F.conv2d
+        elif isinstance(org_module, nn.ConvTranspose2d):
+            self.fwd_kwargs = dict(stride=org_module.stride, padding=org_module.padding,
+                                   dilation=org_module.dilation, groups=org_module.groups, output_padding=org_module.output_padding)
+            self.fwd_func = F.conv_transpose2d
         else:
             self.fwd_kwargs = dict()
             self.fwd_func = F.linear
@@ -183,7 +186,7 @@ class QuantModule(nn.Module):
         self.use_act_quant = False
         self.disable_act_quant = disable_act_quant
         # initialize quantizer
-        self.weight_quantizer = UniformAffineQuantizer(**weight_quant_params)
+        self.weight_quantizer = UniformAffineQuantizer(**weight_quant_params) #this will be replaced by Adaround after recon_model (not for the first layer of the model)
         self.act_quantizer = UniformAffineQuantizer(**act_quant_params)
 
         self.activation_function = StraightThrough()

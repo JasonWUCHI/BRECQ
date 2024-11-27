@@ -57,7 +57,7 @@ def layer_reconstruction(model: QuantModel, layer: QuantModule, cali_data: torch
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=iters, eta_min=0.)
 
     loss_mode = 'none' if act_quant else 'relaxation'
-    rec_loss = opt_mode
+    rec_loss = opt_mode #mse
 
     loss_func = LossFunction(layer, round_loss=loss_mode, weight=weight,
                              max_count=iters, rec_loss=rec_loss, b_range=b_range,
@@ -150,8 +150,8 @@ class LossFunction:
             b = round_loss = 0
         elif self.round_loss == 'relaxation':
             round_loss = 0
-            round_vals = self.layer.weight_quantizer.get_soft_targets()
-            round_loss += self.weight * (1 - ((round_vals - .5).abs() * 2).pow(b)).sum()
+            round_vals = self.layer.weight_quantizer.get_soft_targets() #the h(V) in the paper
+            round_loss += self.weight * (1 - ((round_vals - .5).abs() * 2).pow(b)).sum() #push it to 0 or 1
         else:
             raise NotImplementedError
 

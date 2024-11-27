@@ -178,9 +178,9 @@ if __name__ == '__main__':
     # parser.add_argument('--data_path', default='', type=str, help='path to ImageNet data', required=True)
 
     # quantization parameters
-    parser.add_argument('--n_bits_w', default=4, type=int, help='bitwidth for weight quantization')
+    parser.add_argument('--n_bits_w', default=8, type=int, help='bitwidth for weight quantization')
     parser.add_argument('--channel_wise', action='store_true', help='apply channel_wise quantization for weights')
-    parser.add_argument('--n_bits_a', default=4, type=int, help='bitwidth for activation quantization')
+    parser.add_argument('--n_bits_a', default=8, type=int, help='bitwidth for activation quantization')
     parser.add_argument('--act_quant', action='store_true', help='apply activation quantization')
     parser.add_argument('--disable_8bit_head_stem', action='store_true')
     parser.add_argument('--test_before_calibration', action='store_true')
@@ -210,6 +210,7 @@ if __name__ == '__main__':
 
     # cnn.cuda()
     cnn.eval()
+
     # build quantization parameters
     wq_params = {'n_bits': args.n_bits_w, 'channel_wise': args.channel_wise, 'scale_method': 'max'}
     aq_params = {'n_bits': args.n_bits_a, 'channel_wise': False, 'scale_method': 'max', 'leaf_param': args.act_quant}
@@ -228,7 +229,7 @@ if __name__ == '__main__':
 
     # Initialize weight quantization parameters
     qnn.set_quant_state(True, False)
-    calibrate_model(qnn, dataloader, 1000)
+    # calibrate_model(qnn, dataloader, 1000)
     # _ = qnn(cali_data[:64].to(device))
     # sys.exit()
 

@@ -24,11 +24,11 @@ class QuantModel(nn.Module):
             if type(child_module) in specials:
                 setattr(module, name, specials[type(child_module)](child_module, weight_quant_params, act_quant_params))
 
-            elif isinstance(child_module, (nn.Conv2d, nn.Linear)):
+            elif isinstance(child_module, (nn.Conv2d, nn.Linear, nn.ConvTranspose2d)):
                 setattr(module, name, QuantModule(child_module, weight_quant_params, act_quant_params))
                 prev_quantmodule = getattr(module, name)
 
-            elif isinstance(child_module, (nn.ReLU, nn.ReLU6)):
+            elif isinstance(child_module, (nn.ReLU, nn.ReLU6, nn.SiLU)):
                 if prev_quantmodule is not None:
                     prev_quantmodule.activation_function = child_module
                     setattr(module, name, StraightThrough())

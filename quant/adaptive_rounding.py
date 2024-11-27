@@ -28,7 +28,7 @@ class AdaRoundQuantizer(nn.Module):
 
         self.round_mode = round_mode
         self.alpha = None
-        self.soft_targets = False
+        self.soft_targets = False #This will be set to True
 
         # params for sigmoid function
         self.gamma, self.zeta = -0.1, 1.1
@@ -48,7 +48,7 @@ class AdaRoundQuantizer(nn.Module):
         elif self.round_mode == 'learned_hard_sigmoid':
             x_floor = torch.floor(x / self.delta)
             if self.soft_targets:
-                x_int = x_floor + self.get_soft_targets()
+                x_int = x_floor + self.get_soft_targets() #the h(V) in the paper
             else:
                 x_int = x_floor + (self.alpha >= 0).float()
         else:
