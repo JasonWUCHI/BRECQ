@@ -30,3 +30,9 @@ Referencing Pytorch implementation of BRECQ, ICLR 2021
 2. The activation distribution change-over-time chart
 5. Qualitative Result comparison
 6. Split the diffusion process to N chunks, and quantize the model in different chunks separately.
+
+| Precision | FID | Inception Score | Elapsed time (s) to generate 100 images |
+| ---------- | --- | --------------- | -------------------------------|
+| FP32 | 2924.3272 | 3.2058 | 8.7629 |
+| INT4 | 2919.3817 | 3.2058 | 6.6632 |
+
