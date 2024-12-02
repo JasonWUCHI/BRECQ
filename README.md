@@ -35,6 +35,7 @@ Referencing Pytorch implementation of BRECQ, ICLR 2021
 | ---------- | --- | --------------- | -------------------------------|
 | FP32 | 2924.3272 | 3.2058 | 8.7629 |
 | INT8 (AdaRound) | 1625.5387 | 2.8715 | - |
+| INT8 (Q-Diffusion with AdaRound) | 2716.3310 | 3.1133 | - |
 | INT4 (Round to nearest) | 2919.3817 | 3.2058 | 6.6632 |
 
 
