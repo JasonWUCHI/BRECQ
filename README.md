@@ -33,9 +33,9 @@ Referencing Pytorch implementation of BRECQ, ICLR 2021
 
 | Precision | FID | Inception Score | Elapsed time (s) to generate 100 images |
 | ---------- | --- | --------------- | -------------------------------|
-| FP32 | 401.63 | 3.2058 | 8.7629 |
+| FP32 | 423.80 | 3.2058 | 8.7629 |
 | INT8 (AdaRound) | 321.39 | 2.8715 | - |
 | INT8 (Q-Diffusion with AdaRound) | - | 3.1133 | - |
-| INT4 (Round to nearest) | 428.03 | 3.2058 | 6.6632 |
+| INT4 (Round to nearest) | 414.58 | 3.2058 | 6.6632 |
 
 
