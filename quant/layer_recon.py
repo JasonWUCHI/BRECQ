@@ -97,7 +97,6 @@ def layer_reconstruction(model: QuantModel, layer: QuantModule, cali_data: torch
     if not include_act_func:
         layer.activation_function = org_act_func
 
-
 class LossFunction:
     def __init__(self,
                  layer: QuantModule,

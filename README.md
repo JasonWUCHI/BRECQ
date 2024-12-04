@@ -15,8 +15,8 @@ Referencing Pytorch implementation of BRECQ, ICLR 2021
 - https://colab.research.google.com/drive/1jRHirxZRaufpJAj1dixfo-bvWBYB-L7i?usp=sharing
 2. AdaRound
 - https://colab.research.google.com/drive/1sEcnR6QacAFfKGHcYFNk5xiDowkSKzrw?usp=sharing
-3. Weight for the mnist diffusion model (so don't need to train again)
-- https://drive.google.com/file/d/1uWbVDiU0Me2yZN9jvaT2d1Hivvm6Ud6I/view?usp=sharing
+3. Weight for the mnist diffusion model and other quantized model
+- https://drive.google.com/drive/folders/1_WGoVt-QsN9bSZw-dgwq0qzHt8bIwx4s?usp=drive_link
 
 # Progress
 1. Finish Implementing FID Score
@@ -33,9 +33,9 @@ Referencing Pytorch implementation of BRECQ, ICLR 2021
 
 | Precision | FID | Inception Score | Elapsed time (s) to generate 100 images |
 | ---------- | --- | --------------- | -------------------------------|
-| FP32 | 2924.3272 | 3.2058 | 8.7629 |
-| INT8 (AdaRound) | 1625.5387 | 2.8715 | - |
-| INT8 (Q-Diffusion with AdaRound) | 2716.3310 | 3.1133 | - |
-| INT4 (Round to nearest) | 2919.3817 | 3.2058 | 6.6632 |
+| FP32 | 401.63 | 3.2058 | 8.7629 |
+| INT8 (AdaRound) | 321.39 | 2.8715 | - |
+| INT8 (Q-Diffusion with AdaRound) | - | 3.1133 | - |
+| INT4 (Round to nearest) | 428.03 | 3.2058 | 6.6632 |
 
 
