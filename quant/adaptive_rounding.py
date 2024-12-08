@@ -34,8 +34,7 @@ class AdaRoundQuantizer(nn.Module):
         self.gamma, self.zeta = -0.1, 1.1
         self.beta = 2/3
 
-        if self.round_mode == 'learned_round_sigmoid':
-            self.init_alpha(x=weight_tensor.clone())
+        self.init_alpha(x=weight_tensor.clone())
 
     def forward(self, x):
         if self.round_mode == 'nearest':
@@ -74,5 +73,3 @@ class AdaRoundQuantizer(nn.Module):
             rest = (x / self.delta) - x_floor  # rest of rounding [0, 1)
             alpha = -torch.log((self.zeta - self.gamma) / (rest - self.gamma) - 1)  # => sigmoid(alpha) = rest
             self.alpha = nn.Parameter(alpha)
-        else:
-            raise NotImplementedError
