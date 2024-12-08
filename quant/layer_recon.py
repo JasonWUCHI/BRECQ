@@ -11,7 +11,7 @@ def layer_reconstruction(model: QuantModel, layer: QuantModule, cali_data: torch
                          batch_size: int = 32, iters: int = 20000, weight: float = 0.001, opt_mode: str = 'mse',
                          asym: bool = False, include_act_func: bool = True, b_range: tuple = (20, 2),
                          warmup: float = 0.0, act_quant: bool = False, lr: float = 4e-5, p: float = 2.0,
-                         multi_gpu: bool = False):
+                         multi_gpu: bool = False, round_mode='learned_hard_sigmoid'):
     """
     Block reconstruction to optimize the output from each layer.
 
@@ -34,7 +34,6 @@ def layer_reconstruction(model: QuantModel, layer: QuantModule, cali_data: torch
 
     model.set_quant_state(False, False)
     layer.set_quant_state(True, act_quant)
-    round_mode = 'learned_hard_sigmoid'
 
     if not include_act_func:
         org_act_func = layer.activation_function
