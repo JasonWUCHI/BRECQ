@@ -33,7 +33,9 @@ class AdaRoundQuantizer(nn.Module):
         # params for sigmoid function
         self.gamma, self.zeta = -0.1, 1.1
         self.beta = 2/3
-        self.init_alpha(x=weight_tensor.clone())
+
+        if self.round_mode == 'learned_round_sigmoid':
+            self.init_alpha(x=weight_tensor.clone())
 
     def forward(self, x):
         if self.round_mode == 'nearest':
