@@ -54,7 +54,7 @@ def layer_reconstruction(model: QuantModel, layer: QuantModule, cali_data: torch
         layer.weight_quantizer = AdaRoundQuantizer(uaq=layer.weight_quantizer, round_mode=round_mode,
                                                    weight_tensor=layer.org_weight.data)
         layer.weight_quantizer.soft_targets = True
-        opt_params = [layer.act_quantizer.delta]
+        opt_params = [layer.weight_quantizer.delta]
         optimizer = torch.optim.Adam(opt_params, lr=lr)
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=iters, eta_min=0.)
 
